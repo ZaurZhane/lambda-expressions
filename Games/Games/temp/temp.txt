@@ -1,0 +1,12 @@
+В папке Games создан каталог src
+В папке Games создан каталог res
+В папке Games создан каталог savegames
+В папке Games создан каталог temp
+В папке Games/src создан каталог main
+В папке Games/src создан каталог test
+В папке Games/src/main создан файл Main.java
+В папке Games/src/main создан файл Utils.java
+В папке Games/res создан каталог drawables
+В папке Games/res создан каталог vectors
+В папке Games/res создан каталог icons
+В папке Games/temp создан файл temp.txt
