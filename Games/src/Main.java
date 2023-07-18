@@ -1,103 +1,35 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
 
+        ArrayList<String> directoryList = new ArrayList<>();
+        directoryList.add("Games/src");
+        directoryList.add("Games/res");
+        directoryList.add("Games/savegames");
+        directoryList.add("Games/temp");
+        directoryList.add("Games/src/main");
+        directoryList.add("Games/src/test");
+        directoryList.add("Games/res/drawables");
+        directoryList.add("Games/res/vectors");
+        directoryList.add("Games/res/icons");
+
+        ArrayList<String> fileList = new ArrayList<>();
+        fileList.add("Games/src/Main.java");
+        fileList.add("Games/src/main/Utils.java");
+        fileList.add("Games/temp/temp.txt");
+
         StringBuilder log = new StringBuilder();
 
-        File scr = new File("Games", "src");
-
-        if (!scr.exists()) {
-            scr.mkdirs();
-            log.append("В папке Games создан каталог src\n");
+        for (int i = 0; i < directoryList.size(); i++) {
+            makeDirectory(directoryList.get(i), log);
         }
 
-        File res = new File("Games", "res");
-
-        if (!res.exists()) {
-            res.mkdirs();
-            log.append("В папке Games создан каталог res\n");
-        }
-
-        File saveGames = new File("Games", "savegames");
-
-        if (!saveGames.exists()) {
-            saveGames.mkdirs();
-            log.append("В папке Games создан каталог savegames\n");
-        }
-
-        File temp = new File("Games", "temp");
-
-        if (!temp.exists()) {
-            temp.mkdirs();
-            log.append("В папке Games создан каталог temp\n");
-        }
-
-        File main = new File("Games/src", "main");
-
-        if (!main.exists()) {
-            main.mkdirs();
-            log.append("В папке Games/src создан каталог main\n");
-        }
-
-        File test = new File("Games/src", "test");
-
-        if (!test.exists()) {
-            test.mkdirs();
-            log.append("В папке Games/src создан каталог test\n");
-        }
-
-        File fileMain = new File("Games/src/main", "Main.java");
-
-        try {
-            fileMain.createNewFile();
-            log.append("В папке Games/src/main создан файл Main.java\n");
-        } catch (IOException e) {
-            log.append(e.getMessage());
-            throw  new RuntimeException(e);
-        }
-
-        File fileUtils = new File("Games/src/main", "Utils.java");
-
-        try {
-            fileUtils.createNewFile();
-            log.append("В папке Games/src/main создан файл Utils.java\n");
-        } catch (IOException e) {
-            log.append(e.getMessage());
-            throw  new RuntimeException(e);
-        }
-
-        File drawables = new File("Games/res", "drawables");
-
-        if (!drawables.exists()) {
-            drawables.mkdirs();
-            log.append("В папке Games/res создан каталог drawables\n");
-        }
-
-        File vectors = new File("Games/res", "vectors");
-
-        if (!vectors.exists()) {
-            vectors.mkdirs();
-            log.append("В папке Games/res создан каталог vectors\n");
-        }
-
-        File icons = new File("Games/res", "icons");
-
-        if (!icons.exists()) {
-            icons.mkdirs();
-            log.append("В папке Games/res создан каталог icons\n");
-        }
-
-        File fileTemp= new File("Games/temp", "temp.txt");
-
-        try {
-            fileTemp.createNewFile();
-            log.append("В папке Games/temp создан файл temp.txt\n");
-        } catch (IOException e) {
-            log.append(e.getMessage());
-            throw  new RuntimeException(e);
+        for (int i = 0; i < fileList.size(); i++) {
+            createNewFile(fileList.get(i), log);
         }
 
         try (FileWriter writer = new FileWriter("Games/temp/temp.txt", false)) {
@@ -108,6 +40,38 @@ public class Main {
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
+
+    }
+
+    public static File makeDirectory(String directoryPath, StringBuilder log) {
+
+        File dir = new File(directoryPath);
+
+        try {
+            if (!dir.exists()) {
+                dir.mkdirs();
+                log.append("Cоздан каталог " + directoryPath + "\n");
+            }
+        } catch (Exception e) {
+            log.append("Файл не создан " + directoryPath + " " + e.getMessage());
+        }
+
+        return dir;
+
+    }
+
+    public static File createNewFile(String filePath, StringBuilder log) {
+
+        File file = new File(filePath);
+
+        try {
+            file.createNewFile();
+            log.append("Cоздан файл " + filePath + "\n");
+        } catch (IOException e) {
+            log.append("Файл не создан " + filePath + " " + e.getMessage());
+        }
+
+        return file;
 
     }
 
