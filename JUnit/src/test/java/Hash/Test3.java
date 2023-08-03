@@ -1,5 +1,6 @@
 package Hash;
 
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
 
 import java.util.ArrayList;
@@ -9,9 +10,12 @@ import java.util.List;
 import java.util.ArrayList;
         import java.util.List;
 
+import static com.sun.org.apache.xerces.internal.util.PropertyState.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 public class Test3 {
     @org.junit.jupiter.api.Test
-    public void testConcat_validArgument_success() {
+    public void test3() {
 
         // given:
         List<Integer> expected = new ArrayList<>();
@@ -24,9 +28,9 @@ public class Test3 {
 
         List<Integer> result = search(source, pattern);
 
-        Assertions.assertIterableEquals(expected, result);
+        //Assertions.assertIterableEquals(expected, result);
 
-
+        assertThat(result, Matchers.is(expected));
     }
 
     public static List<Integer> search(String source, String pattern) {

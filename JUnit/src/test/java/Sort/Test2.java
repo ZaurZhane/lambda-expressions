@@ -1,12 +1,17 @@
 package Sort;
 
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
+
+import static com.sun.org.apache.xerces.internal.util.PropertyState.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 
 
 public class Test2 {
 
     @org.junit.jupiter.api.Test
-    public void testConcat_validArgument_success() {
+    public void test2() {
 
         // given:
         int [] expected = {51, 45, 31, 31, 30, 24, 22, 20, 18, 17};
@@ -16,7 +21,9 @@ public class Test2 {
         int[] result = national_team(regional_teams);
 
         // then:
-        Assertions.assertArrayEquals(expected, result);
+        //Assertions.assertArrayEquals(expected, result);
+
+        assertThat(result, Matchers.is(expected));
 
     }
 
