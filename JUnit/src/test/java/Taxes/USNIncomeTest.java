@@ -1,17 +1,14 @@
 package Taxes;
 
-import org.hamcrest.Matchers;
-import org.junit.jupiter.api.Assertions;
-
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.comparesEqualTo;
 
 
-public class Test1 {
+public class USNIncomeTest {
 
     @org.junit.jupiter.api.Test
-    public void test1() {
+    public void calculate() {
         // given:
         int expected = 3; int a = 50; int b = 1;
 
@@ -20,7 +17,9 @@ public class Test1 {
         int result = USNIncome.calcTaxFor(a, b);
 
         // then:
+        // тест 1
         //Assertions.assertEquals(expected, result);
+        // тест 2
         assertThat(expected, comparesEqualTo(result));
 
     }

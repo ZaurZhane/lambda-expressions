@@ -5,10 +5,10 @@ import java.util.HashMap;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasKey;
 
-public class Test4 {
+public class AddressTest {
 
     @org.junit.jupiter.api.Test
-    public void test4() {
+    public void adressExistence() {
 
         HashMap<Address, Integer> costPerAddress = new HashMap<>();
 

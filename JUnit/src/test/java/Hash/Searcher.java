@@ -1,39 +1,11 @@
 package Hash;
 
-import org.hamcrest.Matchers;
-import org.junit.jupiter.api.Assertions;
-
 import java.util.ArrayList;
 import java.util.List;
 
+public class Searcher {
 
-import java.util.ArrayList;
-        import java.util.List;
-
-import static com.sun.org.apache.xerces.internal.util.PropertyState.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-
-public class Test3 {
-    @org.junit.jupiter.api.Test
-    public void test3() {
-
-        // given:
-        List<Integer> expected = new ArrayList<>();
-        expected.add(3);
-        expected.add(14);
-        expected.add(16);
-
-        String source = "Alibaba or Alibubab? I do not know!";
-        String pattern = "b*b";
-
-        List<Integer> result = search(source, pattern);
-
-        //Assertions.assertIterableEquals(expected, result);
-
-        assertThat(result, Matchers.is(expected));
-    }
-
-    public static List<Integer> search(String source, String pattern) {
+    public List<Integer> search(String source, String pattern) {
 
         List<Integer> found = new ArrayList<>();
 

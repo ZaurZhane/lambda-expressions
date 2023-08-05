@@ -3,10 +3,15 @@ package Graphs;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.instanceOf;
 
-public class Test5 {
+public class GraphTest {
     @org.junit.jupiter.api.Test
-    public void test5() {
+    public void classCheck() {
+
+        // given:
         Graph graph = new Graph(6);
+
+        // expect:
         assertThat(graph, instanceOf(Graph.class));
+
     }
 }
