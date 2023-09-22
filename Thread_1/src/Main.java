@@ -1,22 +1,25 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.*;
 
 public class Main {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, ExecutionException {
         String[] texts = new String[25];
         for (int i = 0; i < texts.length; i++) {
             texts[i] = generateText("aab", 30_000);
         }
 
-        long startTs = System.currentTimeMillis(); // start time
+        List<Future> futures = new ArrayList<>();
 
-        List<Thread> threads = new ArrayList<>();
+        ExecutorService threadPool = Executors.newFixedThreadPool(8);
+
+        long startTs = System.currentTimeMillis(); // start time
 
         for (String text : texts) {
 
-            Runnable logic = () -> {
+            Callable<Integer> task = () -> {
 
                 int maxSize = 0;
                 for (int i = 0; i < text.length(); i++) {
@@ -36,18 +39,19 @@ public class Main {
                         }
                     }
                 }
-                System.out.println(text.substring(0, 100) + " -> " + maxSize);
+                return maxSize;
             };
 
-            Thread thread = new Thread(logic);
-            thread.start();
+            Future<Integer> result  = threadPool.submit(task);
 
-            threads.add(thread);
+            futures.add(result);
 
         }
 
-        for (Thread thread : threads) {
-            thread.join(); // зависаем, ждём когда поток объект которого лежит в thread завершится
+        int max = 0;
+
+        for (Future result: futures) {
+            max = Math.max((int) result.get(), max);
         }
 
         long endTs = System.currentTimeMillis(); // end time
