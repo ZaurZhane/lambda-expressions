@@ -6,33 +6,22 @@ public class Main {
 
     public static void main(String[] arg) {
 
+        FirstThread firstThead = new FirstThread(sizeToFreq);
+        SecondThread secondThread = new SecondThread(sizeToFreq);
 
         for (int i = 0; i <= 1000; i++) {
 
-            new Thread(() -> {
+            firstThead.start();
+            secondThread.start();
 
-                int count = 0;
+            try {
+                secondThread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
-                String route = generateRoute("RLRFR", 100);
+            secondThread.interrupt();
 
-                for (int j = 0; j < route.length(); j++) {
-
-                    if (route.charAt(j) == 'R') {
-                        count++;
-                    }
-                }
-
-                synchronized(sizeToFreq) {
-
-                    if (sizeToFreq.containsKey(count)){
-                        sizeToFreq.put(count, sizeToFreq.get(count) + 1);
-                    } else {
-                        sizeToFreq.put(count, 1);
-                    }
-
-                }
-
-            }).start();
         }
 
         int max = sizeToFreq.keySet()
@@ -49,13 +38,8 @@ public class Main {
 
     }
 
-    public static String generateRoute(String letters, int length) {
-        Random random = new Random();
-        StringBuilder route = new StringBuilder();
-        for (int i = 0; i < length; i++) {
-            route.append(letters.charAt(random.nextInt(letters.length())));
-        }
-        return route.toString();
-    }
+
 
 }
+
+
