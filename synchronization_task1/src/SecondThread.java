@@ -2,7 +2,7 @@ import java.util.Comparator;
 import java.util.Map;
 
 public class SecondThread extends Thread {
-    Map<Integer, Integer> sizeToFreq;
+    private Map<Integer, Integer> sizeToFreq;
 
     public SecondThread(Map<Integer, Integer> sizeToFreq) {
         this.sizeToFreq = sizeToFreq;
@@ -16,7 +16,8 @@ public class SecondThread extends Thread {
                 try {
                     sizeToFreq.wait();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
+                    break;
                 }
 
                 int maxLider = sizeToFreq.keySet()
@@ -25,6 +26,7 @@ public class SecondThread extends Thread {
                         .get();
 
                 System.out.println("Текущий лидер " + maxLider + " (встретилось " + sizeToFreq.get(maxLider) + " раз)");
+
             }
         }
     }

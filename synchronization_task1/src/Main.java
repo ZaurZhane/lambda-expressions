@@ -1,44 +1,36 @@
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Main {
 
     public static final Map<Integer, Integer> sizeToFreq = new HashMap<>();
 
-    public static void main(String[] arg) {
+    public static void main(String[] arg) throws InterruptedException {
 
-        FirstThread firstThead = new FirstThread(sizeToFreq);
         SecondThread secondThread = new SecondThread(sizeToFreq);
+        secondThread.start();
 
-        for (int i = 0; i <= 1000; i++) {
+        for (int i = 0; i <= 100; i++) {
 
+            FirstThread firstThead = new FirstThread(sizeToFreq);
             firstThead.start();
-            secondThread.start();
-
-            try {
-                secondThread.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            secondThread.interrupt();
+            firstThead.join();
+            //firstThead.sleep(10);
 
         }
 
-        int max = sizeToFreq.keySet()
-                .stream()
-                .max(Comparator.naturalOrder())
-                .get();
+        secondThread.interrupt();
+//        try {
+//            secondThread.join();
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
 
-        System.out.println("Самое частое количество повторений " + max + " (встретилось " + sizeToFreq.get(max) + " раз)\nДругие размеры:");
+        System.out.printf("test_end");
 
-        sizeToFreq.entrySet()
-                .stream()
-                .filter(entry -> max != entry.getKey())
-                .forEach(entry -> System.out.println("- " + entry.getKey() + " (" + entry.getValue() + " раз)"));
 
     }
-
-
 
 }
 

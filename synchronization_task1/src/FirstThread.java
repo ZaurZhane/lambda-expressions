@@ -1,9 +1,9 @@
+import java.util.Comparator;
 import java.util.Map;
 import java.util.Random;
 
 public class FirstThread extends Thread{
-
-    Map<Integer, Integer> sizeToFreq;
+    private Map<Integer, Integer> sizeToFreq;
 
     public FirstThread(Map<Integer, Integer> sizeToFreq) {
         this.sizeToFreq = sizeToFreq;
@@ -29,6 +29,8 @@ public class FirstThread extends Thread{
             } else {
                 sizeToFreq.put(count, 1);
             }
+            System.out.println("Добавлено повторение " + count + " (встретилось " + sizeToFreq.get(count) + " раз)");
+
             sizeToFreq.notify();
 
         }
