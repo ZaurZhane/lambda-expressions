@@ -8,7 +8,13 @@ public class PhoneBook {
 
     public int add(String name, String phone) {
 
-       return 0;
+        if (!list.containsKey(name)) {
+            list.put(name, phone);
+        } else {
+            System.out.println("В телефонной книге уже есть такой контакт " + name);
+        }
+
+        return list.size();
 
     }
 
