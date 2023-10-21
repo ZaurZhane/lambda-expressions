@@ -1,5 +1,5 @@
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class PhoneBook {
@@ -19,7 +19,21 @@ public class PhoneBook {
     }
 
     public String findByNumber(String number) {
+
+        Collection<String> collection = list.keySet();
+
+        for (String key : collection) {
+
+            String value = list.get(key);
+
+            if (value.equals(number)) {
+                return key;
+            }
+
+        }
+
         return null;
+
     }
 
 
