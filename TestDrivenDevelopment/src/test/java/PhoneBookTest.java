@@ -14,4 +14,14 @@ public class PhoneBookTest {
 
     }
 
+    @Test
+    public void findByNumber() {
+
+        PhoneBook phoneBook = new PhoneBook();
+        String name = phoneBook.findByNumber("+79615285387");
+
+        Assertions.assertEquals("79615285387", name);
+
+    }
+
 }
