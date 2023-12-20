@@ -1,13 +1,17 @@
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
+import org.apache.http.NameValuePair;
+import org.apache.http.client.utils.URLEncodedUtils;
 
 public class Server {
 
@@ -89,12 +93,16 @@ public class Server {
             headers.put("mimeType", mimeType);
             headers.put("length", Integer.toString(length));
 
-            Request request = new Request(method, headers, content);
+            List<NameValuePair> params = URLEncodedUtils.parse(new URI(path), StandardCharsets.UTF_8);
 
-            Handler handler = handlers.get(method).get(path);
+            Request request = new Request(method, headers, content, params);
+
+            Handler handler = handlers.get(method).get(path.split("\\?")[0]);
             handler.handle(request, out);
 
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
             e.printStackTrace();
         }
 
