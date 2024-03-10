@@ -1,0 +1,7 @@
+services:
+  app:
+    image: "AuthenticationApplication"
+    container_name: "auth_app1"
+    build: ./
+    ports:
+      - 8080:8080
