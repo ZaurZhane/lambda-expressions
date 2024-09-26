@@ -61,5 +61,4 @@ public class MainServlet extends HttpServlet {
         return Long.parseLong(substring);
     }
 
-
 }

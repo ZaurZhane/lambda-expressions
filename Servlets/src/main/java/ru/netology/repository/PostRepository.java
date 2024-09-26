@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class PostRepository {
 
     private final ConcurrentHashMap<Long, Post> posts = new ConcurrentHashMap<>();
-    private AtomicLong id = new AtomicLong();
+    private final AtomicLong id = new AtomicLong();
     public List<Post> all() {
         return new ArrayList<>(posts.values());
     }
