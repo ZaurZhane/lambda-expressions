@@ -3,8 +3,16 @@ public class Main {
 
     public static void main(String[] args) {
 
-        var server = new Server(64, 999);
-        server.start();
+        final var server = new Server(64);
+
+        server.addHandler("GET", "/messages", (request, responseStream) -> {
+            server.handlerGet(request, responseStream);
+        });
+        server.addHandler("POST", "/messages", (request, responseStream) -> {
+            server.handlerPost(request, responseStream);
+        });
+
+        server.listen(9999);
 
     }
 }
